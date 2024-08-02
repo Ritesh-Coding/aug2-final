@@ -1,0 +1,23 @@
+.forgetPassword
+{
+    
+    margin-left: 260px;
+}
+#loginContainer
+{
+    display: flex;
+    margin-top: 80px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 250px;
+}
+#forgetPasswordContainer
+{
+    display: flex;
+    margin-top: 80px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+   
+}

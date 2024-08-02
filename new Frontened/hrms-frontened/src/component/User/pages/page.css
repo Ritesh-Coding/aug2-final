@@ -1,0 +1,102 @@
+
+.dashBoardrow
+{
+    display: flex;
+    position: relative;
+    margin: 0 -15px;
+
+}
+
+.dashBoardcol1{
+    margin-left: 210px;
+    width : 50%;
+    /* width: calc(100% / 3); */
+    
+
+
+   }
+   .profilecol2{
+    position: absolute;
+    left: 800px;
+   }
+   .dashBoardcol3{
+
+   margin-left: 25px;
+   width : 70%;
+   }
+   .dashBoardcol4{
+    left: 800px;
+    bottom: 80px;
+    width : 50%;  
+    position: absolute;
+  
+   }
+   .dashboardcol2{
+   
+    width : 50%;
+    /* width: calc(100% / 3); */
+    
+    /* background-color: rgb(50, 48, 167) */
+   }
+
+   .activity > Button
+   {
+        margin: 10px;
+   }
+
+   .e-card-content
+   {
+    list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 20rem;
+  overflow: scroll;
+
+    }
+    .innerButton >Button
+    {
+        padding: 12px;
+        margin: 10px;
+    }
+.documentsData{
+    margin-top: 50px;
+}
+.documentsDetails 
+{
+    margin-left: 260px;
+   
+    
+}
+.editButton
+{
+    margin-left: 275px;
+}
+#profileImage
+{
+    border-radius: 50%;
+    width: 250px;
+}
+
+.attendanceMainCard{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.infoAttendance{
+    width:120px;
+    height:120px
+}
+
+.calender{
+    display: flex;   
+}
+
+.inputElement{
+   color: black;
+   width: 245px;
+   border: 2px solid rgb(7, 39, 7);
+   border-radius: 5px;
+   margin: 8px;
+}
