@@ -2,16 +2,23 @@ import React from 'react'
 import useAxios from '../../../hooks/useAxios';
 import { useState,useEffect } from 'react';
 import CustomSpecialDaysPagination from '../../../hooks/useCustomSpecialDaysPagination';
-const BirthDays = () => {
-    const [currentPage, setCurrentPage] = useState(1);
+interface BirthDayFormatter{
+    id:number
+    dob:string
+    first_name : string
+    last_name : string
+    profile : string
+}
+const BirthDays : React.FC = () => {
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const rowsPerPage = 1;
     const [totalPages, setTotalPages] = useState(1);
     const axiosInstance = useAxios()
-    const [birthdays,setBirthDays]= useState([])
-    const handlePageChange = (page)=>{
+    const [birthdays,setBirthDays]= useState<BirthDayFormatter[]>([])
+    const handlePageChange = (page : number)=>{
         setCurrentPage(page)
     }
-    const showbirthdays=async (page)=>{
+    const showbirthdays=async (page: number)=>{
       const result =await  axiosInstance.get('api/birthdays/',{
             params:{
             page

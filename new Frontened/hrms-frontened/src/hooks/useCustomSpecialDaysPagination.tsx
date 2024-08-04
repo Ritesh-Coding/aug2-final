@@ -1,7 +1,11 @@
 import React from 'react'
 import { Button } from 'react-bootstrap';
-const CustomSpecialDaysPagination = ({ currentPage, totalPages, onPageChange }) => {
-   
+interface CustomPaginationProp{
+  currentPage:number
+  totalPages :number
+  onPageChange : (page : number)=>void
+}
+const CustomSpecialDaysPagination : React.FC<CustomPaginationProp> = ({ currentPage, totalPages, onPageChange }) => {   
     
       const handlePrevious = () => {
         if (currentPage > 1) {
@@ -21,12 +25,10 @@ const CustomSpecialDaysPagination = ({ currentPage, totalPages, onPageChange }) 
           
           <Button onClick={handlePrevious} disabled={currentPage === 1} className="ms-2">
             <span aria-hidden="true">&lsaquo;</span>
-          </Button>
-          
+          </Button>          
           <Button onClick={handleNext} disabled={currentPage === totalPages} className="ms-2">
             <span aria-hidden="true">&rsaquo;</span>
-          </Button>
-        
+          </Button>        
         </div>
       );
 }

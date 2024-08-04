@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Card = (props) => {
+interface CardProps{
+  title : string,
+  content : string
+}
+const Card: React.FC<CardProps> = (props) => {
   return (
     
     <div

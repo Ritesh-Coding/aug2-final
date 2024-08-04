@@ -2,8 +2,18 @@ import React, { useEffect, useMemo, useState } from 'react'
 import axios from 'axios'
 import useAxios from '../../../hooks/useAxios';
 import EmployeeActivities from './EmployeeActivities';
-const AllEmployeeActivities = ({refresh,inputValue}) => {
-    const [employeeData,setData]= useState([])   
+interface AllEmployeeActivityProps{
+  refresh : number
+  inputValue : string
+}
+interface EmployeeActivitiesData {
+  index: number;
+  first_name: string;
+  status: string;
+  status_time: string;
+}
+const AllEmployeeActivities : React.FC<AllEmployeeActivityProps> = ({refresh,inputValue}) => {
+    const [employeeData,setData]= useState<EmployeeActivitiesData[]>([])   
     
     const axiosInstance = useAxios();
     let query = inputValue.trim() !== '' ? `?search=${inputValue}` : '';
@@ -14,7 +24,7 @@ const AllEmployeeActivities = ({refresh,inputValue}) => {
         })
     },[refresh,query])       
 
-  const employeeActivities =(
+  const employeeActivities =  (
   employeeData.map((item,index) => (
     <EmployeeActivities
       key={item.index}
@@ -22,8 +32,8 @@ const AllEmployeeActivities = ({refresh,inputValue}) => {
       status={item.status}
       statusTime={item.status_time}         
     />
-  ))
-  )
+  ) ) 
+  ) 
 
   return (
     <>

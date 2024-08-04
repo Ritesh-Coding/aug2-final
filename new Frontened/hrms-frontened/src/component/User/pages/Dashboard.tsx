@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import Swal from "sweetalert2";
 import Button from 'react-bootstrap/Button';
-
 import AllEmployeeActivities from "../UI/AllEmployeeActivitiesApi";
 import useAxios from "../../../hooks/useAxios";
 import Card from "../../../utils/Card";
@@ -15,52 +14,48 @@ import DateTime from "../../../utils/DateTime";
 import Holidays from "../UI/Holidays";
 import BirthDays from "../UI/BirthDays";
 import DashboardAttendance from "../UI/DashboardAttendance";
-import Chat from "../UI/Chat";
+// import Chat from "../UI/Chat";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import refresh from "../../../assets/refresh.png"
-import EmployeeChat from "../UI/EmployeeChat";
-const Dashboard = () => {
+import { RootState } from "../../../types";
+// import EmployeeChat from "../UI/EmployeeChat";
+const Dashboard : React.FC= () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isFetching, setIsFetching] = useState(true);
-  const { userId } = useSelector((state) => state.auth);
+  const { userId } = useSelector((state : RootState) => state.auth);
   const dispatch = useDispatch();
   dispatch( navbarTitle({navTitle: "DashBoard"}));
   const axiosInstance = useAxios();
-  const [employeeStatus,setEmployeeStatus]= useState("blank")
-  const [isStatusChanged,setIsStatusChanges]= useState("")
+  const [employeeStatus,setEmployeeStatus]= useState<string>("blank")
+  const [isStatusChanged,setIsStatusChanges]= useState<string>("")
   const  [refreshCount,setRefreshCount]= useState(0)
   
-  const  handleAllEmployeeLogsRefresh = useCallback(()=>{
+  const  handleAllEmployeeLogsRefresh = ()=>{
     
     setRefreshCount(refreshCount+1)
    
-  })
- const handleInputChange =(event)=>{
-     setSearchQuery(event.target.value)
-     
+  }
+ const handleInputChange =(event : any)=>{
+     setSearchQuery(event.target.value)     
  }
   useEffect(()=>{
-    let lastestStatus="";
+    let lastestStatus:string ="";
     axiosInstance.get('latestEmployeeActivity/').then(
       res=>{       
         const result = res.data  
-        console.log("this i sthe result",result)
+    
         if(result.length>0){
-          lastestStatus = result[result.length-1]           
-          setEmployeeStatus(lastestStatus.status)  
+          let lastResult = result[result.length-1]  
+          lastestStatus =  lastResult.status
+          // console.log("this is the ",typeof(lastestStatus.status))      
+          // console.log("this is the ",lastestStatus.status)
+
+          setEmployeeStatus(lastestStatus)  
         }        
         else{  
-          console.log("inside else") 
-          if(result.length===0)
-            {
-              setEmployeeStatus("")          
-            }   
-            else{  
-              lastestStatus = result[0]              
-              setEmployeeStatus(lastestStatus.status)
-            } 
-           
+          
+            setEmployeeStatus("")       
         }
       }  
     )    
@@ -74,7 +69,7 @@ const Dashboard = () => {
       </Box>
     );
   }
-  const handleEmployeeActivity = (event)=>{   
+  const handleEmployeeActivity = (event : any)=>{   
     const value = event.currentTarget.getAttribute("value")
     if(value === "checkIn")
       {       
@@ -129,14 +124,14 @@ const Dashboard = () => {
   }
 
 
-  const logsTitle = "Logs"
-  const logsContent = "All Logs"
+  const logsTitle : string = "Logs"
+  const logsContent : string = "All Logs"
 
 
 
   
 
-  let dateObj = new Date();
+  let dateObj : Date = new Date();
 
   let month = String(dateObj.getMonth() + 1)
       .padStart(2, '0');
@@ -147,7 +142,7 @@ const Dashboard = () => {
   let year = dateObj.getFullYear();
   let todayDate = day + '/' + month + '/' + year; 
  
-  let buttonList=``;
+  let buttonList:any=``;
   switch(employeeStatus)
   {
     case "Check In":
@@ -273,8 +268,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="dashboardcol2">
-       
+      <div className="dashboardcol2">       
           <div
             className="e-card e-card-horizontal"
             style={{ marginLeft: `50px` }}
@@ -325,7 +319,7 @@ const Dashboard = () => {
 
 
 
-            <EmployeeChat adminId="2" userId={userId}/>
+            {/* <EmployeeChat adminId="2" userId={userId}/> */}
           
 
 

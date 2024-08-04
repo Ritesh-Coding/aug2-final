@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, Form } from 'formik';
+import { Formik, Form,FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import Button from 'react-bootstrap/Button';
 import InputField from '../../utils/InputField';
@@ -9,6 +9,12 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import hrms from "../../assets/hrms.png"
+interface forgetpassword{
+    username : string,
+    new_password : string
+    confirm_password : string
+    api ?: string 
+}
 const validationSchema = Yup.object({
     username: Yup.string()
         .required('Username is required')
@@ -16,15 +22,14 @@ const validationSchema = Yup.object({
     new_password: Yup.string()
         .required('Password is required')
         .min(3, 'Password must be at least 3 characters'),
-    confirm_password : Yup.string().oneOf([Yup.ref("new_password"),null],"New Password Must Match").required("ConFirm Password is Required")
-    
+    confirm_password : Yup.string().oneOf([Yup.ref("new_password")],"New Password Must Match").required("ConFirm Password is Required")    
 });
-const ForgetPassword = () => {
+const ForgetPassword: React.FC = () => {
     const axiosInstance = useAxios();
 
     const navigate = useNavigate();    
 
-    const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+    const handleSubmit = async (values:forgetpassword, { setSubmitting, setErrors }:FormikHelpers<forgetpassword>) => {
         
         const { username, new_password } = values;
         try {

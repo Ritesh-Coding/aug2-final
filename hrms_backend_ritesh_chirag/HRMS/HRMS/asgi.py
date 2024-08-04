@@ -23,9 +23,9 @@ application = ProtocolTypeRouter({
             chat.routing.websocket_urlpatterns
         )
     ),
-    "websocket": AuthMiddlewareStack(
-        URLRouter(
-            comments.routing.websocket_urlpatterns
-        )
-    ),    
+    # "websocket": AuthMiddlewareStack(
+    #     URLRouter(
+    #         comments.routing.websocket_urlpatterns
+    #     )
+    # ),    
 })

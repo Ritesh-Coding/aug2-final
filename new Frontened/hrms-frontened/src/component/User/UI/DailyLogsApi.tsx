@@ -1,10 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import axios from 'axios'
 import useAxios from '../../../hooks/useAxios';
-import EmployeeActivities from './EmployeeActivities';
+
 import DailyLogs from './DailyLogs';
-const DailyLogsApi = ({status}) => {
-    const [log,setLog]= useState([])
+interface Break {
+  breakIn: string;
+  breakOut: string;
+}
+interface DailyLogsFormat{
+  index : number
+  checkIn : string
+  checkOut : string
+  breaks : Break[]
+}
+interface DailyLogProps{
+  status : string
+}
+const DailyLogsApi : React.FC<DailyLogProps>= ({status}) => {
+    const [log,setLog]= useState<DailyLogsFormat[]>([])
    
     const axiosInstance = useAxios(); 
 

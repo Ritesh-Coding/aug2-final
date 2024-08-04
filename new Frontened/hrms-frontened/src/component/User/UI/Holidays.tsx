@@ -5,17 +5,23 @@ import useAxios from '../../../hooks/useAxios'
 import CircularProgress from "@mui/material/CircularProgress";
 
 import CustomSpecialDaysPagination from '../../../hooks/useCustomSpecialDaysPagination'
-const Holidays = () => {
+interface HolidayFormatter{
+    id: number
+    holiday_image : string,
+    date : string,
+    name : string
+}
+const Holidays : React.FC= () => {
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 1;
     const [totalPages, setTotalPages] = useState(1);
     const axiosInstance = useAxios()
     
-    const [holidays,setHolidays]= useState([])
-    const handlePageChange = (page)=>{
+    const [holidays,setHolidays]=   useState<HolidayFormatter[]>([])
+    const handlePageChange = (page: number)=>{
         setCurrentPage(page)
     }
-    const showHolidays=async (page)=>{
+    const showHolidays=async (page: number)=>{
       const result =await  axiosInstance.get('api/holidays/',{
             params:{
             page
@@ -31,10 +37,8 @@ const Holidays = () => {
           }       
         setHolidays(result.data["results"])       
     }
-    useEffect( ()=>{
-        
-        showHolidays(currentPage)
-      
+    useEffect( ()=>{        
+        showHolidays(currentPage)      
     },[currentPage])
    
   return (
@@ -46,8 +50,7 @@ const Holidays = () => {
         <div style={{float:`right`,width:`60px` ,marginLeft:`25px`}} >
         <CustomSpecialDaysPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} /> 
         </div> 
-        </div>
-               
+        </div>               
         {
             holidays.length >0 ? (holidays.map((holiday)=>(
                 <div key={holiday.id}>

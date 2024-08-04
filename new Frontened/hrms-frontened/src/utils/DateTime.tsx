@@ -1,11 +1,11 @@
 import  React, { useState , useEffect } from 'react'
 
-export const DateTime = () => {
+export const DateTime: React.FC = () => {
 
-    var [date,setDate] = useState(new Date());
+    const [date,setDate] = useState<Date>(new Date());
     
     useEffect(() => {
-        var timer = setInterval(()=>setDate(new Date()), 1000 )
+        let timer = setInterval(()=>setDate(new Date()), 1000 )
         return function cleanup() {
             clearInterval(timer)
         }   
@@ -13,8 +13,7 @@ export const DateTime = () => {
 
     return(
         <div>
-            <p>{date.toLocaleTimeString()}</p>
-          
+            <p>{date.toLocaleTimeString()}</p>   
 
         </div>
     )

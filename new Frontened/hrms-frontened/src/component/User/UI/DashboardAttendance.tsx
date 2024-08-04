@@ -1,12 +1,19 @@
 import React from 'react'
 import useAxios from '../../../hooks/useAxios'
 import { useState,useEffect } from 'react'
-const formatTime = (timeString) => {
+interface AttendanceDataFormat{
+    total_present_days: number
+    total_late_days : number
+    total_half_days : number
+    net_working_hours : string
+    total_office_hours : string
+}
+const formatTime = (timeString : string) => {
     if (!timeString || timeString === "-") return "-";
     return timeString.substring(0, 5);
   };
-const DashboardAttendance = () => {
-    const [attendanceData,setAttendanceData] = useState([])
+const DashboardAttendance : React.FC = () => {
+    const [attendanceData,setAttendanceData] = useState<AttendanceDataFormat[]>([])
     const axiosInstance = useAxios()
   useEffect(()=>{
         axiosInstance.get("dashboardAttendance").then((res)=>{

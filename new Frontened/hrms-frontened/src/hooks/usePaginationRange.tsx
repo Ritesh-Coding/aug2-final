@@ -1,7 +1,11 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-
-export const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+interface PaginationProp{
+  currentPage:number
+  totalPages :number
+  onPageChange : (page : number)=>void
+}
+export const Pagination : React.FC<PaginationProp> = ({ currentPage, totalPages, onPageChange }) => {
   const handleFirstPage = () => {
     onPageChange(1);
   };

@@ -96,14 +96,14 @@ const LeaveRequest = () => {
   return (
     <>
     <div style={{ marginLeft: "250px" }}>  
-    <Link to="/admin/all-leave">
+    <Link to="/dashboard/all-leave">
 
     <Button variant="primary">
           All Leaves
     </Button>
     
     </Link>  
-    <Link to="/admin/assign-leave">
+    <Link to="/dashboard/assign-leave">
     <Button variant="primary">
           Assign Leaves
     </Button>    

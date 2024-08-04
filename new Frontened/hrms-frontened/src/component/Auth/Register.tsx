@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form ,FormikHelpers} from 'formik';
 import * as Yup from 'yup';
 import InputField from '../../utils/InputField';
 import useAxios from '../../hooks/useAxios';
@@ -8,6 +8,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 const nameRegex = /^[a-zA-Z\s-]+$/;
+
+interface RegisterFormValues    {
+    username : string,
+    password : string,
+    first_name : string,
+    last_name : string,
+    email : string,
+    api ?: string,
+    confirmPassword : string,
+}
 const validationSchema = Yup.object({
     username: Yup.string()
         .required('Username is required')
@@ -20,13 +30,13 @@ const validationSchema = Yup.object({
     email: Yup.string()
       .email('Invalid email address')
       .required('Email is Required'),
-    confirmPassword : Yup.string().oneOf([Yup.ref("password"),null],"Password Must Match").required("ConFirm Password is Required")
+    confirmPassword : Yup.string().oneOf([Yup.ref("password")],"Password Must Match").required("ConFirm Password is Required")
     
 });
-const Register = () => {
+const Register : React.FC = () => {
     const axiosInstance = useAxios();    
     const navigate = useNavigate();  
-    const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+    const handleSubmit = async (values : RegisterFormValues, { setSubmitting, setErrors } : FormikHelpers<RegisterFormValues>) => {
         
         const { username, password,first_name,last_name,email } = values;
         try {
@@ -123,7 +133,6 @@ const Register = () => {
                     <Button variant="primary" type="submit" disabled={isSubmitting}>
                         Submit
                     </Button>
-
                 </Form>
             )}
         </Formik>
